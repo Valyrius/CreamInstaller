@@ -93,11 +93,7 @@ internal static class SteamLibrary
             string steamInstallPath = InstallPath;
             if (steamInstallPath == null || !steamInstallPath.DirectoryExists())
                 return libraryDirectories;
-            string libraryFolder = steamInstallPath + @"\steamapps";
-            if (!libraryFolder.DirectoryExists())
-                return libraryDirectories;
-            _ = libraryDirectories.Add(libraryFolder);
-            string libraryFolders = libraryFolder + @"\libraryfolders.vdf";
+            string libraryFolders = steamInstallPath + @"\config\libraryfolders.vdf";
             if (!libraryFolders.FileExists() ||
                 !ValveDataFile.TryDeserialize(libraryFolders.ReadFile(), out VProperty result))
                 return libraryDirectories;
